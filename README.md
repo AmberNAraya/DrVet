@@ -1,2 +1,0 @@
-# DrVet
-Proyecto de LBD 

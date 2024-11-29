@@ -1,4 +1,3 @@
---Obtener el nombre completo del cliente
 CREATE OR REPLACE FUNCTION obtener_nombre_completo_usuario(ID IN NUMBER) RETURN VARCHAR2 AS
   nombre_completo VARCHAR2(100);
 BEGIN
@@ -8,8 +7,6 @@ BEGIN
   RETURN nombre_completo;
 END;
 
-
---Calcular el número de mascotas de un usuario
 CREATE OR REPLACE FUNCTION contar_mascotas_usuario(ID IN NUMBER) RETURN NUMBER AS
   total_mascotas NUMBER;
 BEGIN
@@ -19,8 +16,6 @@ BEGIN
   RETURN total_mascotas;
 END;
 
-
---Calcular el total de stock de productos
 CREATE OR REPLACE FUNCTION calcular_stock_total RETURN NUMBER AS
   total_stock NUMBER;
 BEGIN
@@ -29,8 +24,6 @@ BEGIN
   RETURN total_stock;
 END;
 
-
---Precio promedio de los servicios
 CREATE OR REPLACE FUNCTION precio_promedio_servicios RETURN NUMBER AS
   promedio NUMBER;
 BEGIN
@@ -39,8 +32,6 @@ BEGIN
   RETURN promedio;
 END;
 
-
---Verificar disponibilidad de productos
 CREATE OR REPLACE FUNCTION verificar_disponibilidad_producto(ID IN NUMBER) RETURN VARCHAR2 AS
   resultado VARCHAR2(50);
 BEGIN
@@ -50,9 +41,6 @@ BEGIN
   RETURN resultado;
 END;
 
-
-
---Obtener los ingresos estimados por servicios
 CREATE OR REPLACE FUNCTION ingresos_estimados RETURN NUMBER AS
   total_ingresos NUMBER;
 BEGIN
@@ -61,9 +49,6 @@ BEGIN
   RETURN total_ingresos;
 END;
 
-
-
---Obtener el número total de citas de un usuario
 CREATE OR REPLACE FUNCTION total_citas_usuario(ID IN NUMBER) RETURN NUMBER AS
   total_citas NUMBER;
 BEGIN
@@ -73,9 +58,6 @@ BEGIN
   RETURN total_citas;
 END;
 
-
-
---Obtener el proveedor con más productos
 CREATE OR REPLACE FUNCTION proveedor_mas_productos RETURN VARCHAR2 AS
   nombre_proveedor VARCHAR2(100);
 BEGIN
@@ -88,9 +70,6 @@ BEGIN
   RETURN nombre_proveedor;
 END;
 
-
-
---Calcular el tiempo total de tratamientos
 CREATE OR REPLACE FUNCTION tiempo_total_tratamientos RETURN NUMBER AS
   total_tiempo NUMBER;
 BEGIN
@@ -99,20 +78,15 @@ BEGIN
   RETURN total_tiempo;
 END;
 
-
-
---Determinar si una mascota tiene historial médico
 CREATE OR REPLACE FUNCTION tiene_historial_medico(p_ID IN NUMBER) RETURN VARCHAR2 AS
   cantidad NUMBER;
   resultado VARCHAR2(50);
 BEGIN
-  -- Contamos cuántos registros existen en la tabla historial_medico para la mascota
   SELECT COUNT(*)
   INTO cantidad
   FROM historial_medico
   WHERE ID_Mascota = p_ID;
 
-  -- Verificamos si hay algún historial asociado
   IF cantidad > 0 THEN
     resultado := 'Sí tiene historial';
   ELSE
@@ -125,9 +99,6 @@ EXCEPTION
     RETURN 'Error al verificar el historial';
 END;
 
-
-
---Calcular el total de gastos de un usuario en citas y servicios
 CREATE OR REPLACE FUNCTION calcular_gastos_usuario(ID IN NUMBER) RETURN NUMBER AS
   total_gastos NUMBER;
 BEGIN
@@ -140,9 +111,6 @@ BEGIN
   RETURN total_gastos;
 END;
 
-
-
---Obtener el proveedor de un producto específico
 CREATE OR REPLACE FUNCTION obtener_proveedor_producto(ID IN NUMBER) RETURN VARCHAR2 AS
   proveedor_nombre VARCHAR2(100);
 BEGIN
@@ -155,9 +123,6 @@ BEGIN
   RETURN proveedor_nombre;
 END;
 
-
-
---Contar tratamientos realizados para una mascota específica
 CREATE OR REPLACE FUNCTION contar_tratamientos_mascota(ID IN NUMBER) RETURN NUMBER AS
   total_tratamientos NUMBER;
 BEGIN
@@ -170,10 +135,6 @@ BEGIN
   RETURN total_tratamientos;
 END;
 
-
-
-
---Verificar si un usuario tiene citas pendientes
 CREATE OR REPLACE FUNCTION verificar_citas_pendientes(p_ID IN NUMBER) RETURN VARCHAR2 AS
   cantidad NUMBER;
   resultado VARCHAR2(20);
@@ -198,10 +159,6 @@ EXCEPTION
     RETURN 'Error al verificar citas';
 END;
 
-
-
-
--- Obtener el nombre de la última mascota registrada
 CREATE OR REPLACE FUNCTION ultima_mascota_registrada RETURN VARCHAR2 AS
   nombre_mascota VARCHAR2(50);
 BEGIN

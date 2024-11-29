@@ -1,3 +1,4 @@
+@ -0,0 +1,71 @@
 --Vista de Usuarios y sus Mascotas
 CREATE OR REPLACE VIEW vista_usuarios_mascotas AS
 SELECT u.Nombre AS Usuario, u.Apellido AS Apellido_Usuario, m.Nombre AS Mascota, m.Especie, m.Raza, m.Edad
