@@ -1,3 +1,4 @@
+
 -- Secuencia para la tabla usuarios
 CREATE SEQUENCE seq_usuarios
 START WITH 1

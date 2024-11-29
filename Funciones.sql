@@ -1,3 +1,4 @@
+
 --Obtener el nombre completo del cliente
 CREATE OR REPLACE FUNCTION obtener_nombre_completo_usuario(ID IN NUMBER) RETURN VARCHAR2 AS
   nombre_completo VARCHAR2(100);
