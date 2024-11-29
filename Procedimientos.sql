@@ -1,4 +1,3 @@
-
 --Insertar Usuario
 CREATE OR REPLACE PROCEDURE insertar_usuario (
     p_nombre IN VARCHAR2,
