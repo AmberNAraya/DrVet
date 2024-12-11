@@ -1,8 +1,3 @@
-Revert "Commit"
-This reverts commit 8d1684a23f9d3de62c865d087cded2dc42953073.
-f0e344a
-Cursores.sql
-@@ -1,94 +0,0 @@
 -- Cursor 1: Obtener todos los usuarios activos
 CURSOR c_usuarios_activos IS
   SELECT ID_Usuario, Nombre, Apellido, Fecha_Creacion
@@ -50,3 +45,52 @@ CURSOR c_historial_medico_por_mascota (p_id_mascota IN NUMBER) IS
 CURSOR c_tratamientos_por_mascota (p_id_mascota IN NUMBER) IS
   SELECT t.ID_Tratamiento, t.Descripcion, t.Medicina, t.Duracion, p.Nombre AS Producto
   FROM tratamientos t
+  LEFT JOIN productos p ON t.ID_Producto = p.ID_Producto
+  WHERE t.ID_Historial IN (
+    SELECT ID_Historial
+    FROM historial_medico
+    WHERE ID_Mascota = p_id_mascota
+  );
+
+-- Cursor 9: Obtener todos los productos disponibles (stock > 0)
+CURSOR c_productos_disponibles IS
+  SELECT ID_Producto, Nombre, Descripcion, Stock, Precio
+  FROM productos
+  WHERE Stock > 0;
+
+-- Cursor 10: Obtener todos los usuarios con citas pendientes
+CURSOR c_usuarios_con_citas IS
+  SELECT DISTINCT u.ID_Usuario, u.Nombre, u.Apellido
+  FROM usuarios u
+  JOIN citas c ON u.ID_Usuario = c.ID_Usuario
+  WHERE c.Fecha >= TRUNC(SYSDATE);
+
+-- Cursor 11: Obtener las citas programadas para un usuario específico
+CURSOR c_citas_por_usuario (p_id_usuario IN NUMBER) IS
+  SELECT ID_Cita, Fecha, Hora, Motivo
+  FROM citas
+  WHERE ID_Usuario = p_id_usuario;
+
+-- Cursor 12: Obtener todos los medicamentos de un proveedor específico
+CURSOR c_medicamentos_por_proveedor (p_id_proveedor IN NUMBER) IS
+  SELECT ID_Medicamento, Nombre, Descripcion, Precio, Stock, Fecha_Vencimiento
+  FROM medicamentos
+  WHERE ID_Proveedor = p_id_proveedor;
+
+-- Cursor 13: Obtener las ubicaciones registradas
+CURSOR c_ubicaciones IS
+  SELECT ID_Ubicacion, Nombre, Direccion
+  FROM ubicaciones;
+
+-- Cursor 14: Obtener los tratamientos asociados a un producto específico
+CURSOR c_tratamientos_por_producto (p_id_producto IN NUMBER) IS
+  SELECT t.ID_Tratamiento, t.Descripcion, t.Medicina, t.Duracion
+  FROM tratamientos t
+  WHERE t.ID_Producto = p_id_producto;
+
+-- Cursor 15: Obtener todas las citas pasadas para un usuario
+CURSOR c_citas_pasadas_por_usuario (p_id_usuario IN NUMBER) IS
+  SELECT ID_Cita, Fecha, Hora, Motivo
+  FROM citas
+  WHERE ID_Usuario = p_id_usuario
+    AND Fecha < TRUNC(SYSDATE);
