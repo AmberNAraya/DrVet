@@ -1,5 +1,4 @@
-
---Insertar Usuario
+-- Insertar Usuario
 CREATE OR REPLACE PROCEDURE insertar_usuario (
     p_nombre IN VARCHAR2,
     p_apellido IN VARCHAR2,
@@ -9,22 +8,20 @@ CREATE OR REPLACE PROCEDURE insertar_usuario (
     p_usuario_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO usuarios (ID_Usuario, Nombre, Apellido, Telefono, Email, Rol, Fecha_Creacion)
+    INSERT INTO usuario (id_usuario, nombre, apellido, telefono, email, rol, fecha_creacion)
     VALUES (seq_usuarios.NEXTVAL, p_nombre, p_apellido, p_telefono, p_email, p_rol, SYSDATE)
-    RETURNING ID_Usuario INTO p_usuario_id;
+    RETURNING id_usuario INTO p_usuario_id;
 
     COMMIT;
-
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al insertar usuario: ' || SQLERRM);
         ROLLBACK;
         p_usuario_id := NULL;
+        RAISE_APPLICATION_ERROR(-20001, 'Error al insertar usuario: ' || SQLERRM);
 END;
+/
 
-
-
---Actualizar Usuario
+-- Actualizar Usuario
 CREATE OR REPLACE PROCEDURE actualizar_usuario (
     p_id_usuario IN NUMBER,
     p_nombre IN VARCHAR2,
@@ -33,41 +30,39 @@ CREATE OR REPLACE PROCEDURE actualizar_usuario (
     p_email IN VARCHAR2
 ) AS
 BEGIN
-    UPDATE usuarios
-    SET Nombre = p_nombre,
-        Apellido = p_apellido,
-        Telefono = p_telefono,
-        Email = p_email,
-        Fecha_Actualizacion = SYSDATE
-    WHERE ID_Usuario = p_id_usuario;
+    UPDATE usuario
+    SET nombre = p_nombre,
+        apellido = p_apellido,
+        telefono = p_telefono,
+        email = p_email,
+        fecha_actualizacion = SYSDATE
+    WHERE id_usuario = p_id_usuario;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar usuario: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20002, 'Error al actualizar usuario: ' || SQLERRM);
 END;
+/
 
-
-
---Eliminar Usuario
+-- Eliminar Usuario
 CREATE OR REPLACE PROCEDURE eliminar_usuario (
     p_id_usuario IN NUMBER
 ) AS
 BEGIN
-    DELETE FROM usuarios
-    WHERE ID_Usuario = p_id_usuario;
+    DELETE FROM usuario
+    WHERE id_usuario = p_id_usuario;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al eliminar usuario: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20003, 'Error al eliminar usuario: ' || SQLERRM);
 END;
+/
 
-
-
---Insertar Proveedor
+-- Insertar Proveedor
 CREATE OR REPLACE PROCEDURE insertar_proveedor (
     p_nombre IN VARCHAR2,
     p_descripcion IN CLOB,
@@ -76,21 +71,20 @@ CREATE OR REPLACE PROCEDURE insertar_proveedor (
     p_proveedor_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO proveedores (ID_Proveedor, Nombre, Descripcion, Telefono, Email)
+    INSERT INTO proveedor (id_proveedor, nombre, descripcion, telefono, email)
     VALUES (seq_proveedores.NEXTVAL, p_nombre, p_descripcion, p_telefono, p_email)
-    RETURNING ID_Proveedor INTO p_proveedor_id;
+    RETURNING id_proveedor INTO p_proveedor_id;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al insertar proveedor: ' || SQLERRM);
         ROLLBACK;
         p_proveedor_id := NULL;
+        RAISE_APPLICATION_ERROR(-20004, 'Error al insertar proveedor: ' || SQLERRM);
 END;
+/
 
-
-
---Actualizar Proveedor
+-- Actualizar Proveedor
 CREATE OR REPLACE PROCEDURE actualizar_proveedor (
     p_id_proveedor IN NUMBER,
     p_nombre IN VARCHAR2,
@@ -99,40 +93,38 @@ CREATE OR REPLACE PROCEDURE actualizar_proveedor (
     p_email IN VARCHAR2
 ) AS
 BEGIN
-    UPDATE proveedores
-    SET Nombre = p_nombre,
-        Descripcion = p_descripcion,
-        Telefono = p_telefono,
-        Email = p_email
-    WHERE ID_Proveedor = p_id_proveedor;
+    UPDATE proveedor
+    SET nombre = p_nombre,
+        descripcion = p_descripcion,
+        telefono = p_telefono,
+        email = p_email
+    WHERE id_proveedor = p_id_proveedor;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar proveedor: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20005, 'Error al actualizar proveedor: ' || SQLERRM);
 END;
+/
 
-
-
---Eliminar Proveedor
+-- Eliminar Proveedor
 CREATE OR REPLACE PROCEDURE eliminar_proveedor (
     p_id_proveedor IN NUMBER
 ) AS
 BEGIN
-    DELETE FROM proveedores
-    WHERE ID_Proveedor = p_id_proveedor;
+    DELETE FROM proveedor
+    WHERE id_proveedor = p_id_proveedor;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al eliminar proveedor: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20006, 'Error al eliminar proveedor: ' || SQLERRM);
 END;
+/
 
-
-
---Insertar Mascota
+-- Insertar Mascota
 CREATE OR REPLACE PROCEDURE insertar_mascota (
     p_nombre IN VARCHAR2,
     p_especie IN VARCHAR2,
@@ -142,21 +134,20 @@ CREATE OR REPLACE PROCEDURE insertar_mascota (
     p_mascota_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO mascota (ID_Mascota, Nombre, Especie, Raza, Edad, ID_Usuario)
+    INSERT INTO mascota (id_mascota, nombre, especie, raza, edad, id_usuario)
     VALUES (seq_mascota.NEXTVAL, p_nombre, p_especie, p_raza, p_edad, p_id_usuario)
-    RETURNING ID_Mascota INTO p_mascota_id;
+    RETURNING id_mascota INTO p_mascota_id;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al insertar mascota: ' || SQLERRM);
         ROLLBACK;
         p_mascota_id := NULL;
+        RAISE_APPLICATION_ERROR(-20007, 'Error al insertar mascota: ' || SQLERRM);
 END;
+/
 
-
-
---Actualizar Mascota
+-- Actualizar Mascota
 CREATE OR REPLACE PROCEDURE actualizar_mascota (
     p_id_mascota IN NUMBER,
     p_nombre IN VARCHAR2,
@@ -166,39 +157,37 @@ CREATE OR REPLACE PROCEDURE actualizar_mascota (
 ) AS
 BEGIN
     UPDATE mascota
-    SET Nombre = p_nombre,
-        Especie = p_especie,
-        Raza = p_raza,
-        Edad = p_edad
-    WHERE ID_Mascota = p_id_mascota;
+    SET nombre = p_nombre,
+        especie = p_especie,
+        raza = p_raza,
+        edad = p_edad
+    WHERE id_mascota = p_id_mascota;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar mascota: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20008, 'Error al actualizar mascota: ' || SQLERRM);
 END;
+/
 
-
-
---Eliminar Mascota
+-- Eliminar Mascota
 CREATE OR REPLACE PROCEDURE eliminar_mascota (
     p_id_mascota IN NUMBER
 ) AS
 BEGIN
     DELETE FROM mascota
-    WHERE ID_Mascota = p_id_mascota;
+    WHERE id_mascota = p_id_mascota;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al eliminar mascota: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20009, 'Error al eliminar mascota: ' || SQLERRM);
 END;
+/
 
-
-
---Insertar Producto
+-- Insertar Producto
 CREATE OR REPLACE PROCEDURE insertar_producto (
     p_nombre IN VARCHAR2,
     p_descripcion IN CLOB,
@@ -208,21 +197,20 @@ CREATE OR REPLACE PROCEDURE insertar_producto (
     p_producto_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO productos (ID_Producto, Nombre, Descripcion, Stock, Precio, ID_Proveedor)
+    INSERT INTO producto (id_producto, nombre, descripcion, stock, precio, id_proveedor)
     VALUES (seq_productos.NEXTVAL, p_nombre, p_descripcion, p_stock, p_precio, p_id_proveedor)
-    RETURNING ID_Producto INTO p_producto_id;
+    RETURNING id_producto INTO p_producto_id;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al insertar producto: ' || SQLERRM);
         ROLLBACK;
         p_producto_id := NULL;
+        RAISE_APPLICATION_ERROR(-20010, 'Error al insertar producto: ' || SQLERRM);
 END;
+/
 
-
-
---Actualizar Producto
+-- Actualizar Producto
 CREATE OR REPLACE PROCEDURE actualizar_producto (
     p_id_producto IN NUMBER,
     p_nombre IN VARCHAR2,
@@ -231,40 +219,39 @@ CREATE OR REPLACE PROCEDURE actualizar_producto (
     p_precio IN NUMBER
 ) AS
 BEGIN
-    UPDATE productos
-    SET Nombre = p_nombre,
-        Descripcion = p_descripcion,
-        Stock = p_stock,
-        Precio = p_precio
-    WHERE ID_Producto = p_id_producto;
+    UPDATE producto
+    SET nombre = p_nombre,
+        descripcion = p_descripcion,
+        stock = p_stock,
+        precio = p_precio
+    WHERE id_producto = p_id_producto;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar producto: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20011, 'Error al actualizar producto: ' || SQLERRM);
 END;
+/
 
 
-
---Eliminar Producto
+-- Eliminar Producto
 CREATE OR REPLACE PROCEDURE eliminar_producto (
     p_id_producto IN NUMBER
 ) AS
 BEGIN
-    DELETE FROM productos
-    WHERE ID_Producto = p_id_producto;
+    DELETE FROM producto
+    WHERE id_producto = p_id_producto;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al eliminar producto: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20012, 'Error al eliminar producto: ' || SQLERRM);
 END;
+/
 
-
-
---Insertar Servicio
+-- Insertar Servicio
 CREATE OR REPLACE PROCEDURE insertar_servicio (
     p_nombre IN VARCHAR2,
     p_descripcion IN CLOB,
@@ -273,21 +260,20 @@ CREATE OR REPLACE PROCEDURE insertar_servicio (
     p_servicio_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO servicios (ID_Servicio, Nombre, Descripcion, Precio, ID_Proveedor)
+    INSERT INTO servicio (id_servicio, nombre, descripcion, precio, id_proveedor)
     VALUES (seq_servicios.NEXTVAL, p_nombre, p_descripcion, p_precio, p_id_proveedor)
-    RETURNING ID_Servicio INTO p_servicio_id;
+    RETURNING id_servicio INTO p_servicio_id;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al insertar servicio: ' || SQLERRM);
         ROLLBACK;
         p_servicio_id := NULL;
+        RAISE_APPLICATION_ERROR(-20013, 'Error al insertar servicio: ' || SQLERRM);
 END;
+/
 
-
-
---Actualizar Servicio
+-- Actualizar Servicio
 CREATE OR REPLACE PROCEDURE actualizar_servicio (
     p_id_servicio IN NUMBER,
     p_nombre IN VARCHAR2,
@@ -295,39 +281,37 @@ CREATE OR REPLACE PROCEDURE actualizar_servicio (
     p_precio IN NUMBER
 ) AS
 BEGIN
-    UPDATE servicios
-    SET Nombre = p_nombre,
-        Descripcion = p_descripcion,
-        Precio = p_precio
-    WHERE ID_Servicio = p_id_servicio;
+    UPDATE servicio
+    SET nombre = p_nombre,
+        descripcion = p_descripcion,
+        precio = p_precio
+    WHERE id_servicio = p_id_servicio;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar servicio: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20014, 'Error al actualizar servicio: ' || SQLERRM);
 END;
+/
 
-
-
---Eliminar Servicio
+-- Eliminar Servicio
 CREATE OR REPLACE PROCEDURE eliminar_servicio (
     p_id_servicio IN NUMBER
 ) AS
 BEGIN
-    DELETE FROM servicios
-    WHERE ID_Servicio = p_id_servicio;
+    DELETE FROM servicio
+    WHERE id_servicio = p_id_servicio;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al eliminar servicio: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20015, 'Error al eliminar servicio: ' || SQLERRM);
 END;
+/
 
-
-
---Registrar Cita
+-- Registrar Cita
 CREATE OR REPLACE PROCEDURE registrar_cita (
     p_fecha IN DATE,
     p_hora IN DATE,
@@ -337,21 +321,20 @@ CREATE OR REPLACE PROCEDURE registrar_cita (
     p_cita_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO citas (ID_Cita, Fecha, Hora, Motivo, ID_Mascota, ID_Usuario)
+    INSERT INTO cita (id_cita, fecha, hora, motivo, id_mascota, id_usuario)
     VALUES (seq_citas.NEXTVAL, p_fecha, p_hora, p_motivo, p_id_mascota, p_id_usuario)
-    RETURNING ID_Cita INTO p_cita_id;
+    RETURNING id_cita INTO p_cita_id;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al registrar cita: ' || SQLERRM);
         ROLLBACK;
         p_cita_id := NULL;
+        RAISE_APPLICATION_ERROR(-20016, 'Error al registrar cita: ' || SQLERRM);
 END;
+/
 
-
-
---Actualizar Cita
+-- Actualizar Cita
 CREATE OR REPLACE PROCEDURE actualizar_cita (
     p_id_cita IN NUMBER,
     p_fecha IN DATE,
@@ -359,39 +342,37 @@ CREATE OR REPLACE PROCEDURE actualizar_cita (
     p_motivo IN VARCHAR2
 ) AS
 BEGIN
-    UPDATE citas
-    SET Fecha = p_fecha,
-        Hora = p_hora,
-        Motivo = p_motivo
-    WHERE ID_Cita = p_id_cita;
+    UPDATE cita
+    SET fecha = p_fecha,
+        hora = p_hora,
+        motivo = p_motivo
+    WHERE id_cita = p_id_cita;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar cita: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20017, 'Error al actualizar cita: ' || SQLERRM);
 END;
+/
 
-
-
---Eliminar Cita
+-- Eliminar Cita
 CREATE OR REPLACE PROCEDURE eliminar_cita (
     p_id_cita IN NUMBER
 ) AS
 BEGIN
-    DELETE FROM citas
-    WHERE ID_Cita = p_id_cita;
+    DELETE FROM cita
+    WHERE id_cita = p_id_cita;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al eliminar cita: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20018, 'Error al eliminar cita: ' || SQLERRM);
 END;
+/
 
-
-
---Registrar Historial Médico
+-- Registrar Historial Médico
 CREATE OR REPLACE PROCEDURE registrar_historial (
     p_descripcion IN CLOB,
     p_fecha IN DATE,
@@ -400,21 +381,20 @@ CREATE OR REPLACE PROCEDURE registrar_historial (
     p_historial_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO historial_medico (ID_Historial, Descripcion, Fecha, ID_Mascota, ID_Usuario)
+    INSERT INTO historial_medico (id_historial, descripcion, fecha, id_mascota, id_usuario)
     VALUES (seq_historial_medico.NEXTVAL, p_descripcion, p_fecha, p_id_mascota, p_id_usuario)
-    RETURNING ID_Historial INTO p_historial_id;
+    RETURNING id_historial INTO p_historial_id;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al registrar historial médico: ' || SQLERRM);
         ROLLBACK;
         p_historial_id := NULL;
+        RAISE_APPLICATION_ERROR(-20019, 'Error al registrar historial médico: ' || SQLERRM);
 END;
+/
 
-
-
---Actualizar Historial Médico
+-- Actualizar Historial Médico
 CREATE OR REPLACE PROCEDURE actualizar_historial (
     p_id_historial IN NUMBER,
     p_descripcion IN CLOB,
@@ -422,20 +402,19 @@ CREATE OR REPLACE PROCEDURE actualizar_historial (
 ) AS
 BEGIN
     UPDATE historial_medico
-    SET Descripcion = p_descripcion,
-        Fecha = p_fecha
-    WHERE ID_Historial = p_id_historial;
+    SET descripcion = p_descripcion,
+        fecha = p_fecha
+    WHERE id_historial = p_id_historial;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar historial médico: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20020, 'Error al actualizar historial médico: ' || SQLERRM);
 END;
+/
 
-
-
---Insertar Tratamiento
+-- Insertar Tratamiento
 CREATE OR REPLACE PROCEDURE insertar_tratamiento (
     p_descripcion IN CLOB,
     p_medicina IN VARCHAR2,
@@ -446,21 +425,20 @@ CREATE OR REPLACE PROCEDURE insertar_tratamiento (
     p_tratamiento_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO tratamientos (ID_Tratamiento, Descripcion, Medicina, Duracion, ID_Historial, ID_Producto, ID_Usuario)
+    INSERT INTO tratamiento (id_tratamiento, descripcion, medicina, duracion, id_historial, id_producto, id_usuario)
     VALUES (seq_tratamientos.NEXTVAL, p_descripcion, p_medicina, p_duracion, p_id_historial, p_id_producto, p_id_usuario)
-    RETURNING ID_Tratamiento INTO p_tratamiento_id;
+    RETURNING id_tratamiento INTO p_tratamiento_id;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al insertar tratamiento: ' || SQLERRM);
         ROLLBACK;
         p_tratamiento_id := NULL;
+        RAISE_APPLICATION_ERROR(-20021, 'Error al insertar tratamiento: ' || SQLERRM);
 END;
+/
 
-
-
---Actualizar Tratamiento
+-- Actualizar Tratamiento
 CREATE OR REPLACE PROCEDURE actualizar_tratamiento (
     p_id_tratamiento IN NUMBER,
     p_descripcion IN CLOB,
@@ -468,74 +446,73 @@ CREATE OR REPLACE PROCEDURE actualizar_tratamiento (
     p_duracion IN NUMBER
 ) AS
 BEGIN
-    UPDATE tratamientos
-    SET Descripcion = p_descripcion,
-        Medicina = p_medicina,
-        Duracion = p_duracion
-    WHERE ID_Tratamiento = p_id_tratamiento;
+    UPDATE tratamiento
+    SET descripcion = p_descripcion,
+        medicina = p_medicina,
+        duracion = p_duracion
+    WHERE id_tratamiento = p_id_tratamiento;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar tratamiento: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20022, 'Error al actualizar tratamiento: ' || SQLERRM);
 END;
+/
 
-
-
---Eliminar Tratamiento
+-- Eliminar Tratamiento
 CREATE OR REPLACE PROCEDURE eliminar_tratamiento (
     p_id_tratamiento IN NUMBER
 ) AS
 BEGIN
-    DELETE FROM tratamientos
-    WHERE ID_Tratamiento = p_id_tratamiento;
+    DELETE FROM tratamiento
+    WHERE id_tratamiento = p_id_tratamiento;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al eliminar tratamiento: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20023, 'Error al eliminar tratamiento: ' || SQLERRM);
 END;
+/
 
-
-
---Insertar Ubicación
+-- Insertar Ubicación
 CREATE OR REPLACE PROCEDURE insertar_ubicacion (
     p_nombre IN VARCHAR2,
     p_direccion IN VARCHAR2,
     p_ubicacion_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO ubicaciones (ID_Ubicacion, Nombre, Direccion)
+    INSERT INTO ubicacion (id_ubicacion, nombre, direccion)
     VALUES (seq_ubicaciones.NEXTVAL, p_nombre, p_direccion)
-    RETURNING ID_Ubicacion INTO p_ubicacion_id;
+    RETURNING id_ubicacion INTO p_ubicacion_id;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al insertar ubicación: ' || SQLERRM);
         ROLLBACK;
         p_ubicacion_id := NULL;
+        RAISE_APPLICATION_ERROR(-20024, 'Error al insertar ubicación: ' || SQLERRM);
 END;
+/
 
-
-
---Actualizar Ubicación
+-- Actualizar Ubicación
 CREATE OR REPLACE PROCEDURE actualizar_ubicacion (
     p_id_ubicacion IN NUMBER,
     p_nombre IN VARCHAR2,
     p_direccion IN VARCHAR2
 ) AS
 BEGIN
-    UPDATE ubicaciones
-    SET Nombre = p_nombre,
-        Direccion = p_direccion
-    WHERE ID_Ubicacion = p_id_ubicacion;
+    UPDATE ubicacion
+    SET nombre = p_nombre,
+        direccion = p_direccion
+    WHERE id_ubicacion = p_id_ubicacion;
 
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar ubicación: ' || SQLERRM);
         ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20025, 'Error al actualizar ubicación: ' || SQLERRM);
 END;
+/
+
