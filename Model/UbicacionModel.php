@@ -1,5 +1,6 @@
 <?php
-// Model/UbicacionModel.php
+include_once $_SERVER["DOCUMENT_ROOT"] . '/ProyectoPaws/DrVet/Database/db.php';
+
 include_once '../Database/db.php';  // Asegúrate de incluir la conexión correctamente
 
 class UbicacionModel {

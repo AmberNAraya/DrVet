@@ -1,4 +1,6 @@
 <?php
+include_once $_SERVER["DOCUMENT_ROOT"] . '/ProyectoAmbienteWeb/Model/UbicacionModel.php';
+
 // controllers/UbicacionController.php
 include_once '../Model/UbicacionModel.php';  
 

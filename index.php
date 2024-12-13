@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="fonts/icomoon.css">
   <link rel="stylesheet" type="text/css" href="css/vendor.css">
+
   <!--Bootstrap ================================================== -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -46,7 +47,7 @@
                     <li class="sub-page pe-0"><a class="text-black text-uppercase dropdown-item" href="index.html">
                         Sacar cita para mi mascota</a></li>
                     <li class="sub-page pe-0"><a class="text-black text-uppercase dropdown-item" href="index.html">
-                        Historial Medico</a></li>
+                        Historial Médico de mi mascota</a></li>
                   </ul>
                 </li>
                 <!-- Ubicación ================================================== -->
@@ -62,7 +63,7 @@
 
                 <!-- Ubicación ================================================== -->
                 <li class="menu-itemhome4">
-                  <a href="about-us.html" class="text-uppercase item-anchor">Ubicación de la clínica</a>
+                  <a href="./Views/Ubicacion/Ubicacion.php" class="text-uppercase item-anchor">Ubicación de la clínica</a>
                 </li>
               </ul>
               <div class="hamburger">
@@ -98,6 +99,7 @@
       </div>
     </div>
   </header>
+  
   <!-- Banner principal, centrado. ================================================== -->
   <section id="billboard" class="padding-large no-padding-top position-relative">
     <div class="image-holder">
@@ -254,32 +256,6 @@
     <div class="swiper-pagination"></div>
   </section>
 
-  <!-- Más imágenes ilustrativas ================================================== -->
-  <section id="categories" class="overflow-hidden">
-    <div class="full-width-container d-flex flex-wrap">
-      <!-- Imagen 1 -->
-      <div class="category-item left-block col-md-6 col-sm-12 no-padding-left position-relative">
-        <div class="image-holder">
-          <img id="image-vacunacion" src="images/category-item1.jpg" alt="Vacunación">
-        </div>
-        <div class="category-content content-light">
-        </div>
-      </div>
-      <!-- Imagen 2 -->
-      <div class="right-block col-md-6 col-sm-12 no-padding-right">
-        <div class="category-item top-block position-relative">
-          <div class="image-holder">
-            <img id="image-control" src="images/category-item2.jpg" alt="Control">
-          </div>
-          <div class="category-content content-light">
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
-  </section>
-
 
   <!-- Footer ================================================== -->
   <footer id="footer" class="overflow-hidden">
@@ -320,7 +296,7 @@
 
             <div class="col-lg-4 col-sm-6">
               <div class="footer-menu contact-item menu-004">
-                <p>Si necesitas ayuda llámanos al: <a href="tel:22478877">2247-8877</a></p>
+                <p>Si necesitas ayuda llámanos al: <a href="tel:22478877">2901-2288</a></p>
               </div>
             </div>
 
