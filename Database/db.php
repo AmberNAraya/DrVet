@@ -1,16 +1,20 @@
- <?php
+<?php
 
 $username = 'Vete';
-$password = 'admin';
-$dbname = 'DrPet';
-$hostname = 'localhost:1521/orcl';
+$password = 'admin'; 
+$hostname = 'localhost:1521/orcl'; 
 
+// Intentar la conexión
 $conn = oci_connect($username, $password, $hostname);
 
-if(!$conn) {
+if (!$conn) {
     $e = oci_error();
-    echo htmlentities($e['message'], ENT_QUOTES);
+    echo "Error al conectar a la base de datos: " . htmlentities($e['message'], ENT_QUOTES);
     exit;
+} else {
+    echo "Conexión exitosa a la base de datos Paws!";
 }
+
+oci_close($conn);
 
 ?>
