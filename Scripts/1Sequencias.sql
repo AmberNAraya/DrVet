@@ -43,3 +43,8 @@ INCREMENT BY 1;
 CREATE SEQUENCE seq_ubicaciones
 START WITH 1
 INCREMENT BY 1;
+
+-- Crear secuencia para el identificador de usuario
+CREATE SEQUENCE seq_usuario
+START WITH 1
+INCREMENT BY 1;

@@ -516,3 +516,140 @@ EXCEPTION
 END;
 /
 
+--consultar usuario
+CREATE OR REPLACE PROCEDURE consultar_usuario (
+    p_id_usuario IN NUMBER,
+    p_nombre OUT VARCHAR2,
+    p_apellido OUT VARCHAR2,
+    p_telefono OUT VARCHAR2,
+    p_email OUT VARCHAR2,
+    p_rol OUT VARCHAR2
+) AS
+BEGIN
+    SELECT nombre, apellido, telefono, email, rol
+    INTO p_nombre, p_apellido, p_telefono, p_email, p_rol
+    FROM usuario
+    WHERE id_usuario = p_id_usuario;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR(-20021, 'Usuario no encontrado');
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20022, 'Error al consultar usuario: ' || SQLERRM);
+END;
+/
+
+
+--Consultar mascota
+CREATE OR REPLACE PROCEDURE consultar_mascota (
+    p_id_mascota IN NUMBER,
+    p_nombre OUT VARCHAR2,
+    p_especie OUT VARCHAR2,
+    p_raza OUT VARCHAR2,
+    p_edad OUT NUMBER,
+    p_id_usuario OUT NUMBER
+) AS
+BEGIN
+    SELECT nombre, especie, raza, edad, id_usuario
+    INTO p_nombre, p_especie, p_raza, p_edad, p_id_usuario
+    FROM mascota
+    WHERE id_mascota = p_id_mascota;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR(-20023, 'Mascota no encontrada');
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20024, 'Error al consultar mascota: ' || SQLERRM);
+END;
+/
+----
+--Crear mascota
+CREATE OR REPLACE PROCEDURE insertar_mascota (
+    p_nombre IN VARCHAR2,
+    p_especie IN VARCHAR2,
+    p_raza IN VARCHAR2,
+    p_edad IN NUMBER,
+    p_id_usuario IN NUMBER,
+    p_mascota_id OUT NUMBER
+) AS
+BEGIN
+    INSERT INTO mascota (id_mascota, nombre, especie, raza, edad, id_usuario)
+    VALUES (seq_mascota.NEXTVAL, p_nombre, p_especie, p_raza, p_edad, p_id_usuario)
+    RETURNING id_mascota INTO p_mascota_id;
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        p_mascota_id := NULL;
+        RAISE_APPLICATION_ERROR(-20007, 'Error al insertar mascota: ' || SQLERRM);
+END;
+/
+
+--Consultar mascota por id
+CREATE OR REPLACE PROCEDURE consultar_mascota (
+    p_id_mascota IN NUMBER,
+    p_nombre OUT VARCHAR2,
+    p_especie OUT VARCHAR2,
+    p_raza OUT VARCHAR2,
+    p_edad OUT NUMBER,
+    p_id_usuario OUT NUMBER
+) AS
+BEGIN
+    SELECT nombre, especie, raza, edad, id_usuario
+    INTO p_nombre, p_especie, p_raza, p_edad, p_id_usuario
+    FROM mascota
+    WHERE id_mascota = p_id_mascota;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR(-20010, 'Mascota no encontrada');
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20011, 'Error al consultar mascota: ' || SQLERRM);
+END;
+/
+
+--modificar mascota
+CREATE OR REPLACE PROCEDURE actualizar_mascota (
+    p_id_mascota IN NUMBER,
+    p_nombre IN VARCHAR2,
+    p_especie IN VARCHAR2,
+    p_raza IN VARCHAR2,
+    p_edad IN NUMBER
+) AS
+BEGIN
+    UPDATE mascota
+    SET nombre = p_nombre,
+        especie = p_especie,
+        raza = p_raza,
+        edad = p_edad
+    WHERE id_mascota = p_id_mascota;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(-20008, 'Mascota no encontrada para actualizar');
+    END IF;
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20008, 'Error al actualizar mascota: ' || SQLERRM);
+END;
+/
+
+--Eliminar mascota
+CREATE OR REPLACE PROCEDURE eliminar_mascota (
+    p_id_mascota IN NUMBER
+) AS
+BEGIN
+    DELETE FROM mascota
+    WHERE id_mascota = p_id_mascota;
+
+    IF SQL%ROWCOUNT = 0 THEN
+        RAISE_APPLICATION_ERROR(-20009, 'Mascota no encontrada para eliminar');
+    END IF;
+
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE_APPLICATION_ERROR(-20009, 'Error al eliminar mascota: ' || SQLERRM);
+END;
+/

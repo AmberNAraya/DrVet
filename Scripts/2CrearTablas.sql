@@ -63,6 +63,7 @@ CREATE TABLE cita (
   motivo VARCHAR2(255) DEFAULT NULL,
   id_mascota NUMBER,
   id_usuario NUMBER,
+  Asistencia VARCHAR2(10),
   CONSTRAINT fk_cita_mascota FOREIGN KEY (id_mascota)
     REFERENCES mascota (id_mascota),
   CONSTRAINT fk_cita_usuario FOREIGN KEY (id_usuario)
