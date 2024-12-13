@@ -46,13 +46,13 @@
                     <li class="sub-page pe-0"><a class="text-black text-uppercase dropdown-item" href="index.html">
                         Sacar cita para mi mascota</a></li>
                     <li class="sub-page pe-0"><a class="text-black text-uppercase dropdown-item" href="index.html">
-                        Ver citas agendadas</a></li>
+                        Historial Medico</a></li>
                   </ul>
                 </li>
                 <!-- Ubicación ================================================== -->
                 <!-- Asegúrate de que apunte al archivo controlador adecuado -->
                 <li class="menu-itemhome2">
-                    <a href="./Views/Ubicacion.php" class="text-uppercase item-anchor">Ubicación</a>
+                  <a href="./Views/Ubicacion.php" class="text-uppercase item-anchor">Nuestros servicios</a>
                 </li>
 
                 <!-- Ubicación ================================================== -->
@@ -62,7 +62,7 @@
 
                 <!-- Ubicación ================================================== -->
                 <li class="menu-itemhome4">
-                  <a href="about-us.html" class="text-uppercase item-anchor">Ubicación</a>
+                  <a href="about-us.html" class="text-uppercase item-anchor">Ubicación de la clínica</a>
                 </li>
               </ul>
               <div class="hamburger">
@@ -282,54 +282,54 @@
 
 
   <!-- Footer ================================================== -->
-<footer id="footer" class="overflow-hidden">
-  <div class="container mt-5">
-    <div class="row">
-      <div class="footer-top-area">
-        <div class="row d-flex flex-wrap justify-content-between">
-          
-          <!-- Columna de Logo y Descripción -->
-          <div class="col-lg-3 col-sm-6">
-            <div class="footer-menu menu-001">
-              <img src="images/main-logo.jpg" alt="logo">
-              <p>En Paws nuestra prioridad es que los animales se sientan en buenas manos.</p>
-              <!-- Links ilustrativos ================================================== -->
-              <div class="social-links">
-                <ul class="d-flex list-unstyled">
-                  <li>
-                    <a href="#">
-                      <i class="icon icon-facebook"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="icon icon-instagram1"></i>
-                    </a>
-                  </li>
-                </ul>
+  <footer id="footer" class="overflow-hidden">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="footer-top-area">
+          <div class="row d-flex flex-wrap justify-content-between">
+
+            <!-- Columna de Logo y Descripción -->
+            <div class="col-lg-3 col-sm-6">
+              <div class="footer-menu menu-001">
+                <img src="images/main-logo.jpg" alt="logo">
+                <p>En Paws nuestra prioridad es que los animales se sientan en buenas manos.</p>
+                <!-- Links ilustrativos ================================================== -->
+                <div class="social-links">
+                  <ul class="d-flex list-unstyled">
+                    <li>
+                      <a href="#">
+                        <i class="icon icon-facebook"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="icon icon-instagram1"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- Contáctanos Section -->
-          <div class="col-lg-4 col-sm-6">
-            <div class="footer-menu contact-item menu-004">
-              <h5 class="widget-title">Contáctanos</h5>
-              <p>Tienes alguna sugerencia? <a href="mailto:sugerencias@paws.com">sugerencias@paws.com</a></p>
+            <!-- Contáctanos Section -->
+            <div class="col-lg-4 col-sm-6">
+              <div class="footer-menu contact-item menu-004">
+                <h5 class="widget-title">Contáctanos</h5>
+                <p>Tienes alguna sugerencia? <a href="mailto:sugerencias@paws.com">sugerencias@paws.com</a></p>
+              </div>
             </div>
-          </div>
 
-          <div class="col-lg-4 col-sm-6">
-            <div class="footer-menu contact-item menu-004">
-              <p>Si necesitas ayuda llámanos al: <a href="tel:22478877">2247-8877</a></p>
+            <div class="col-lg-4 col-sm-6">
+              <div class="footer-menu contact-item menu-004">
+                <p>Si necesitas ayuda llámanos al: <a href="tel:22478877">2247-8877</a></p>
+              </div>
             </div>
-          </div>
 
-        </div> <!-- End row d-flex -->
-      </div> <!-- End footer-top-area -->
-    </div> <!-- End row -->
-  </div> <!-- End container -->
-  <hr>
-</footer>
+          </div> <!-- End row d-flex -->
+        </div> <!-- End footer-top-area -->
+      </div> <!-- End row -->
+    </div> <!-- End container -->
+    <hr>
+  </footer>
 
   <!-- script ================================================== -->
   <script src="js/jquery-1.11.0.min.js"></script>
