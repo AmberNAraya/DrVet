@@ -30,9 +30,10 @@ START WITH 1
 INCREMENT BY 1;
 
 -- Secuencia para la tabla historial_medico
-CREATE SEQUENCE seq_historial_medico
-START WITH 1
+CREATE SEQUENCE historial_medico_seq
+START WITH 1 
 INCREMENT BY 1;
+
 
 -- Secuencia para la tabla tratamientos
 CREATE SEQUENCE seq_tratamientos

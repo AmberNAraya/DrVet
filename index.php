@@ -46,8 +46,7 @@
                   <ul class="dropdown-menu">
                     <li class="sub-page pe-0"><a class="text-black text-uppercase dropdown-item" href="index.html">
                         Sacar cita para mi mascota</a></li>
-                    <li class="sub-page pe-0"><a class="text-black text-uppercase dropdown-item" href="index.html">
-                        Historial Médico de mi mascota</a></li>
+                        <li class="sub-page pe-0"><a class="text-black text-uppercase dropdown-item" href="http://localhost/DrVet/Views/historial_medico/list.php">Historial Médico</a></li>
                   </ul>
                 </li>
                 <!-- Ubicación ================================================== -->

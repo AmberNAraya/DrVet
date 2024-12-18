@@ -373,25 +373,25 @@ END;
 /
 
 -- Registrar Historial Médico
-CREATE OR REPLACE PROCEDURE registrar_historial (
+CREATE OR REPLACE PROCEDURE insertar_historial_medico(
     p_descripcion IN CLOB,
     p_fecha IN DATE,
     p_id_mascota IN NUMBER,
-    p_id_usuario IN NUMBER,
-    p_historial_id OUT NUMBER
+    p_id_usuario IN NUMBER
 ) AS
 BEGIN
     INSERT INTO historial_medico (id_historial, descripcion, fecha, id_mascota, id_usuario)
-    VALUES (seq_historial_medico.NEXTVAL, p_descripcion, p_fecha, p_id_mascota, p_id_usuario)
-    RETURNING id_historial INTO p_historial_id;
+    VALUES (historial_medico_seq.NEXTVAL, p_descripcion, p_fecha, p_id_mascota, p_id_usuario);
 
     COMMIT;
+
 EXCEPTION
     WHEN OTHERS THEN
         ROLLBACK;
-        p_historial_id := NULL;
-        RAISE_APPLICATION_ERROR(-20019, 'Error al registrar historial médico: ' || SQLERRM);
+        RAISE;
 END;
+/
+
 /
 
 -- Actualizar Historial Médico
