@@ -1,20 +1,12 @@
 <?php
-
-$username = 'Vete';
-$password = 'admin'; 
-$hostname = 'localhost:1521/orcl'; 
-
-// Intentar la conexión
-$conn = oci_connect($username, $password, $hostname);
-
+$user = "DrVet";
+$pass = "admin";
+$host = "localhost/xepdb1";
+$conn = oci_connect($user, $pass, $host);
 if (!$conn) {
     $e = oci_error();
-    echo "Error al conectar a la base de datos: " . htmlentities($e['message'], ENT_QUOTES);
-    exit;
+    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 } else {
-    echo "Conexión exitosa a la base de datos Paws!";
+    echo "ORACLE DATABASE CONNECTED SUCCESSFULLY!!!<br>";
 }
-
-oci_close($conn);
-
 ?>

@@ -16,69 +16,7 @@
 </head>
 
 <body class="bg-accent-light">
-    <!-- Header -->
-    <header id="header" class="content-light">
-        <div class="header-wrap container py-3">
-            <div class="row align-items-center">
-                <div class="primary-nav col-md-5 col-sm-2">
-                    <nav class="navbar">
-                        <div class="main-menu">
-                            <ul class="menu-list list-unstyled d-flex m-0">
-                                <li class="menu-itemhome1 dropdown">
-                                    <a class="text-uppercase item-anchor dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                       aria-expanded="false">Citas</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="sub-page pe-0"><a class="text-black text-uppercase dropdown-item" href="../../index.php">Sacar cita para mi mascota</a></li>
-                                        <li class="sub-page pe-0"><a class="text-black text-uppercase dropdown-item" href="../../index.php">Historial Médico de mi mascota</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-itemhome2">
-                                    <a href="./Ubicacion.php" class="text-uppercase item-anchor">Nuestros servicios</a>
-                                </li>
-                                <li class="menu-itemhome3">
-                                    <a href="../../about-us.html" class="text-uppercase item-anchor">Productos</a>
-                                </li>
-                                <li class="menu-itemhome4">
-                                    <a href="./Ubicacion.php" class="text-uppercase item-anchor">Ubicación de la clínica</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-                <div class="col-md-2 col-sm-4 brand-block text-center">
-                    <div class="main-logo">
-                        <a href="../../index.php">
-                            <img src="../../images/main-logo.jpg" alt="logo" class="brand-image">
-                        </a>
-                    </div>
-                </div>
-                <div class="right-block col-md-5 col-sm-4">
-                    <nav class="navbar justify-content-end">
-                        <div class="user-items">
-                            <ul class="list-unstyled content-light d-flex align-items-center m-0">
-                                <li>
-                                    <i class="icon icon-user"></i>
-                                    <a href="../../my-account.html" class="text-uppercase item-anchor">Iniciar Sesión</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <!-- Banner Principal -->
-    <section id="billboard" class="padding-large no-padding-top position-relative">
-        <div class="image-holder">
-            <img src="../../images/banner-image.jpg" alt="banner" class="banner-image">
-        </div>
-        <div class="banner-content content-light style1 text-center col-md-6">
-            <h2 class="banner-title">Historial Médico de las Mascotas</h2>
-        </div>
-    </section>
-
-    <!-- Listado de Historiales Médicos -->
     <section class="container my-5">
         <h1>Listado de Historiales Médicos</h1>
         
@@ -121,13 +59,11 @@
         </table>
     </section>
 
-    <!-- Footer -->
     <footer id="footer" class="overflow-hidden">
         <div class="container mt-5">
             <div class="row">
                 <div class="footer-top-area">
                     <div class="row d-flex flex-wrap justify-content-between">
-                        <!-- Columna de Logo y Descripción -->
                         <div class="col-lg-3 col-sm-6">
                             <div class="footer-menu menu-001">
                                 <img src="../../images/main-logo.jpg" alt="logo">
@@ -140,7 +76,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Contáctanos Section -->
                         <div class="col-lg-4 col-sm-6">
                             <div class="footer-menu contact-item menu-004">
                                 <h5 class="widget-title">Contáctanos</h5>
@@ -159,7 +94,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="../../js/jquery-1.11.0.min.js"></script>
     <script src="../../js/plugins.js"></script>
     <script src="../../js/script.js"></script>
