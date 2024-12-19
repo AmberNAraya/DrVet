@@ -1,5 +1,5 @@
 <?php
-$user = "DrVet";
+$user = "lenguaje";
 $pass = "admin";
 $host = "localhost/xepdb1";
 $conn = oci_connect($user, $pass, $host);
