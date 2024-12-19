@@ -300,9 +300,8 @@ END;
 
 -- Procedimientos CRUD para Cita
 --Insertar
-CREATE OR REPLACE PROCEDURE insertar_cita (
-    p_fecha IN DATE,
-    p_hora IN DATE,
+CREATE OR REPLACE PROCEDURE INSERTAR_CITA (
+    p_fecha_hora IN DATE,
     p_motivo IN VARCHAR2,
     p_id_mascota IN NUMBER,
     p_id_usuario IN NUMBER,
@@ -310,18 +309,11 @@ CREATE OR REPLACE PROCEDURE insertar_cita (
     p_cita_id OUT NUMBER
 ) AS
 BEGIN
-    INSERT INTO cita (id_cita, fecha, hora, motivo, id_mascota, id_usuario, asistencia)
-    VALUES (seq_citas.NEXTVAL, p_fecha, p_hora, p_motivo, p_id_mascota, p_id_usuario, p_asistencia)
-    RETURNING id_cita INTO p_cita_id;
-    COMMIT;
-EXCEPTION
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error al insertar cita: ' || SQLERRM);
-        ROLLBACK;
-        p_cita_id := NULL;
+    INSERT INTO cita (id_cita, fecha, motivo, id_mascota, id_usuario, asistencia)
+    VALUES (seq_citas.NEXTVAL, p_fecha_hora, p_motivo, p_id_mascota, p_id_usuario, p_asistencia)
+    RETURNING id_cita INTO p_cita_id;  
 END;
 /
-
 --Actualizar
 CREATE OR REPLACE PROCEDURE actualizar_cita (
     p_id_cita IN NUMBER,
@@ -532,6 +524,175 @@ BEGIN
 EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error al eliminar medicamento: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+
+-- Procedimientos CRUD para Inventario
+--Insertar
+CREATE OR REPLACE PROCEDURE insertar_inventario (
+    p_id_producto IN NUMBER,
+    p_cantidad IN NUMBER,
+    p_id_inventario OUT NUMBER
+) AS
+BEGIN
+    INSERT INTO inventario (id_inventario, id_producto, cantidad, fecha_actualizacion)
+    VALUES (seq_inventario.NEXTVAL, p_id_producto, p_cantidad, SYSDATE)
+    RETURNING id_inventario INTO p_id_inventario;
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al insertar inventario: ' || SQLERRM);
+        ROLLBACK;
+        p_id_inventario := NULL;
+END;
+/
+
+
+--Actualizar
+CREATE OR REPLACE PROCEDURE actualizar_inventario (
+    p_id_inventario IN NUMBER,
+    p_id_producto IN NUMBER,
+    p_cantidad IN NUMBER
+) AS
+BEGIN
+    UPDATE inventario
+    SET id_producto = p_id_producto,
+        cantidad = p_cantidad,
+        fecha_actualizacion = SYSDATE
+    WHERE id_inventario = p_id_inventario;
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al actualizar inventario: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+
+--Eliminar
+CREATE OR REPLACE PROCEDURE eliminar_inventario (
+    p_id_inventario IN NUMBER
+) AS
+BEGIN
+    DELETE FROM inventario WHERE id_inventario = p_id_inventario;
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al eliminar inventario: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+
+-- Procedimientos CRUD para Examen
+--Insertar
+CREATE OR REPLACE PROCEDURE insertar_examen (
+    p_tipo IN VARCHAR2,
+    p_fecha IN DATE,
+    p_resultado IN VARCHAR2,
+    p_id_mascota IN NUMBER,
+    p_id_tratamiento IN NUMBER,
+    p_examen_id OUT NUMBER
+) AS
+BEGIN
+    -- Usar la secuencia para generar el ID_EXAMEN automáticamente
+    INSERT INTO examen (id_examen, tipo, fecha, resultado, id_mascota, id_tratamiento)
+    VALUES (seq_examenes.NEXTVAL, p_tipo, p_fecha, p_resultado, p_id_mascota, p_id_tratamiento)
+    RETURNING id_examen INTO p_examen_id;
+END;
+/
+
+-- Actualizar
+CREATE OR REPLACE PROCEDURE actualizar_examen (
+    p_id_examen IN NUMBER,
+    p_id_mascota IN NUMBER,
+    p_id_tratamiento IN NUMBER,
+    p_tipo IN VARCHAR2,
+    p_fecha IN DATE,
+    p_resultado IN VARCHAR2
+) AS
+BEGIN
+    UPDATE examen
+    SET id_mascota = p_id_mascota,
+        id_tratamiento = p_id_tratamiento,
+        tipo = p_tipo,
+        fecha = p_fecha,
+        resultado = p_resultado
+    WHERE id_examen = p_id_examen;
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al actualizar examen: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+
+-- Eliminar
+CREATE OR REPLACE PROCEDURE eliminar_examen (
+    p_id_examen IN NUMBER
+) AS
+BEGIN
+    DELETE FROM examen WHERE id_examen = p_id_examen;
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al eliminar examen: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+
+-- Procedimientos CRUD para Cliente
+--Insertar
+CREATE OR REPLACE PROCEDURE insertar_cliente (
+    p_nombre IN VARCHAR2,
+    p_apellido IN VARCHAR2,
+    p_direccion IN VARCHAR2,
+    p_telefono IN VARCHAR2,
+    p_email IN VARCHAR2,
+    p_cliente_id OUT NUMBER
+) AS
+BEGIN
+    INSERT INTO cliente (id_cliente, nombre, apellido, direccion, telefono, email)
+    VALUES (seq_clientes.NEXTVAL, p_nombre, p_apellido, p_direccion, p_telefono, p_email)
+    RETURNING id_cliente INTO p_cliente_id;
+END;
+/
+
+-- Actualizar
+CREATE OR REPLACE PROCEDURE actualizar_cliente (
+    p_id_cliente IN NUMBER,
+    p_nombre IN VARCHAR2,
+    p_apellido IN VARCHAR2,
+    p_direccion IN VARCHAR2,
+    p_telefono IN VARCHAR2,
+    p_email IN VARCHAR2
+) AS
+BEGIN
+    UPDATE cliente
+    SET nombre = p_nombre,
+        apellido = p_apellido,
+        direccion = p_direccion,
+        telefono = p_telefono,
+        email = p_email
+    WHERE id_cliente = p_id_cliente;
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al actualizar cliente: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+
+
+-- Eliminar
+CREATE OR REPLACE PROCEDURE eliminar_cliente (
+    p_id_cliente IN NUMBER
+) AS
+BEGIN
+    DELETE FROM cliente WHERE id_cliente = p_id_cliente;
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al eliminar cliente: ' || SQLERRM);
         ROLLBACK;
 END;
 /
