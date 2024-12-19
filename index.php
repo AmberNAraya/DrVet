@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Veterinaria Paws</title>
+  <title>DrPet</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,22 +20,51 @@
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
         <!-- Logo -->
-        <a href="index.html" class="navbar-brand text-dark d-flex align-items-center">
+        <a href="index.php" class="navbar-brand text-dark d-flex align-items-center">
           <img src="img/perro-tejonero.png" alt="Logo" class="logo me-2" width="50">
           <span>DrPet</span>
         </a>
-        <!-- Navigation -->
         <nav class="navbar">
           <ul class="nav">
-            <li class="nav-item"><a href="#services" class="nav-link text-dark">Servicios</a></li>
-            <li class="nav-item"><a href="#products" class="nav-link text-dark">Productos</a></li>
-            <li class="nav-item"><a href="#location" class="nav-link text-dark">Ubicación</a></li>
+            <li class="nav-item"><a href="Views/cliente/list.php" class="nav-link text-dark">Cliente</a></li>
+            <li class="nav-item"><a href="Views/servicio/list.php" class="nav-link text-dark">Servicio</a></li>
+            
+            <!-- Dropdown for Ubicación -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-dark" href="Views/inventario/list.php" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Productos
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="Views/inventario/list.php">Inventario</a></li>
+                <li><a class="dropdown-item" href="Views/producto/list.php">Producto</a></li>
+                <li><a class="dropdown-item" href="Views/proveedor/list.php">Proveedor</a></li>
+                <li><a class="dropdown-item" href="Views/medicamento/list.php">Medicamento</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-dark" href="Views/inventario/list.php" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Mascota
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="Views/examen/list.php">Examenes</a></li>
+                <li><a class="dropdown-item" href="Views/historial_medico/list.php">Historial Medico</a></li>
+                <li><a class="dropdown-item" href="Views/tratamiento/list.php">Tratamiento</a></li>
+              </ul>
+            </li>
           </ul>
+          
+          <!-- Profile Image as Link -->
+          <a href="views/usuario/list.php">
+            <img src="img/usuario.png" alt="Imagen de Usuario" class="rounded-circle" width="28" height="28">
+          </a>
         </nav>
       </div>
     </div>
   </header>
 </body>
+
+
 
 
   <!-- Main Banner -->
@@ -45,9 +74,9 @@
     <p>Nos preocupamos por la salud de tus mascotas</p>
     <p>¡Reserva tu cita hoy y mantén a tu mascota feliz y saludable con nosotros!</p>
     <!-- Botón para sacar una cita -->
-    <a href="#citas" class="btn mt-3" style="background-color: #F6A985; color: #fff; border: none; padding: 5px 20px; border-radius: 5px; font-size: 16px; text-decoration: none;">
-      Cita
-    </a>
+    <a href="Views/cita/list.php" class="btn mt-3" style="background-color: #F6A985; color: #fff; border: none; padding: 5px 20px; border-radius: 5px; font-size: 16px; text-decoration: none;">
+  Cita
+</a>
   </div>
 </section>
 
@@ -197,13 +226,14 @@
 
 
 
-  <!-- Location Section -->
+ <!-- Location Section -->
 <section id="location" class="py-5" style="background-color: #ffffff;">
   <div class="container text-center">
-    <h2>Ubicación de la Clínica</h2>
+    <h2 style="color: #FFA07A;">Ubicación de la Clínica</h2> <!-- Naranja pastel -->
     <p>Visítanos en nuestra clínica para una atención personalizada.</p>
   </div>
-
+  <br>
+  <br>
   <!-- Contact Info -->
   <div class="container">
     <div class="row justify-content-center">
@@ -213,15 +243,15 @@
           <i class="fas fa-map-marker-alt fa-2x me-3"></i>
           <div>
             <h5>Dirección</h5>
-            <p>Calle 123, Ciudad, País</p>
+            <p>Calle 123, San Jose, Costa Rica</p>
           </div>
         </div>
       </div>
 
       <!-- Teléfono -->
-      <div class="col-md-4 mb-3 text-center">
-        <div class="d-flex align-items-center justify-content-center">
-          <i class="fas fa-phone-alt fa-2x me-3"></i>
+      <div class="col-md-4 mb-3">
+        <div class="text-center">
+          <i class="fas fa-phone-alt fa-2x mb-2"></i>
           <div>
             <h5>Teléfono</h5>
             <p>+123 456 789</p>
@@ -245,16 +275,17 @@
 
 
 
- <!-- Footer -->
-<footer id="footer" class="bg-white py-4">
+  <!-- Footer -->
+<hr style="border-top: 2px solid #fff; margin-top: 0px;">
+<footer id="footer" class="bg-light" style="padding: 10px 0;">
   <div class="container text-center">
-    <p>&copy; 2024 Veterinaria Paws. Todos los derechos reservados.</p>
+    <p>&copy; 2024 DrPet. <br> Todos los derechos reservados.</p>
     <ul class="list-inline">
-      <li class="list-inline-item"><a href="#" class="text-dark">Facebook</a></li>
-      <li class="list-inline-item"><a href="#" class="text-dark">Instagram</a></li>
     </ul>
   </div>
 </footer>
+
+
 
 
   <!-- Scripts -->
